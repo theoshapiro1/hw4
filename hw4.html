@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>hw4</title>
+<style>
+    body {
+      background-color: rgb(230, 156, 21);
+    }
+    h1 {
+      color: white;
+      text-align: center;
+    }
+    p {
+      font-family: verdana;
+      font-size: 30px;
+    }
+    </style>
+</head>
+
+<body>
+<h1>Joe's Hotdogs</h1>
+<h3>Receipt</h3>
+ <script>
+    function round(num) {
+        i = 0
+        while (num >= 1) { //figure out how far decimal is from the left of the number
+            num = num/10
+            i++
+        }
+        j = 0
+        while (j < i+3) { //shift decimal to 3 spots right of its original position so the last number before the decimal is the rounder
+            num = num*10
+            j++
+        }
+        numString = "" + num
+        array = []
+        for (let x = 0; x < j; x++) {
+            array.push(numString[x])
+        }
+       if ((parseInt(array[j-1]))%10 >= 5) { //round up
+        num = num + 10
+       }
+       num = "" + num
+       y = 0
+       finalString = ""
+       while (y < j-1) { //add all but last digit to final array cuz last digit has either been rounded up or is less than 5 so irrelevant
+        finalString += num[y]
+        y++
+       }
+       finalNum = parseInt(finalString)
+       finalNum = finalNum / 100
+       return finalNum
+
+    }
+    
+    hotdogs = prompt("How many hotdogs do you want?")
+    fries = prompt("How many fries do you want?")
+    sodas = prompt("How many sodas do you want?")
+    array = [hotdogs, fries, sodas]
+    subtotal = (hotdogs * 4) + (fries * 3.50) + (sodas * 1.75)
+    document.write(hotdogs + " hotdogs $4.00" + "<br />")
+    document.write(fries + " fries $3.50" + "<br />")
+    document.write(sodas + " sodas $1.75" + "<br />" + "<br />")
+   
+    if (subtotal >= 20) {
+        discountSubtotal = round(subtotal * 0.9)
+        document.write("subtotal: $" + round(subtotal) + "<br />")
+        document.write("discount: 10%" + "<br />")
+        document.write("pre-tax total: $" + discountSubtotal + "<br />" + "<br />")
+        document.write("tax: 6.25%" + "<br />")
+        total = round(discountSubtotal * 1.0625)
+        document.write("total: $" + total + "<br />")
+    } else {
+        document.write("subtotal: $" + round(subtotal) + "<br />" + "<br />")
+        document.write("tax: 6.25%" + "<br />")
+        total = round(discountSubtotal * 1.0625)
+        document.write("total: $" + total + "<br />")
+    }
+
+ </script>
+</body>
+
+</html>
